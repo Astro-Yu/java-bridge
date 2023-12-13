@@ -1,28 +1,41 @@
 package bridge.View;
 
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+import static bridge.View.InputValidator.checkBlack;
+import static bridge.View.InputValidator.checkEmpty;
+import static bridge.View.InputValidator.checkNumeric;
+
+import camp.nextstep.edu.missionutils.Console;
+
 public class InputView {
 
-    /**
-     * 다리의 길이를 입력받는다.
-     */
+
     public int readBridgeSize() {
-        return 0;
+        String inputBridge = Console.readLine();
+        bridgeValidate(inputBridge);
+        return Integer.parseInt(inputBridge);
     }
 
-    /**
-     * 사용자가 이동할 칸을 입력받는다.
-     */
     public String readMoving() {
-        return null;
+        String inputMoving = Console.readLine();
+        validate(inputMoving);
+        return inputMoving;
     }
 
-    /**
-     * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-     */
     public String readGameCommand() {
-        return null;
+        String inputRestart = Console.readLine();
+        validate(inputRestart);
+        return inputRestart;
+    }
+
+    private static void bridgeValidate(String input) {
+        checkEmpty(input);
+        checkBlack(input);
+        checkNumeric(input);
+
+    }
+
+    private static void validate(String input) {
+        checkEmpty(input);
+        checkBlack(input);
     }
 }
