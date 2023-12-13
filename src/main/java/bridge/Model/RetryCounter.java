@@ -2,10 +2,11 @@ package bridge.Model;
 
 public class RetryCounter {
 
+    private final static int INITIAL_COUNT = 0;
     private int retryCounter;
 
-    public RetryCounter(int retryCounter) {
-        this.retryCounter = retryCounter;
+    public RetryCounter() {
+        this.retryCounter = INITIAL_COUNT;
     }
 
     public void addOne() {

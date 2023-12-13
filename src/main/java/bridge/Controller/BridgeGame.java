@@ -1,21 +1,38 @@
 package bridge.Controller;
 
+import static bridge.View.OutputView.printMap;
+
+import bridge.Model.FinalResult;
+import bridge.Model.Restart;
+import bridge.Model.UpDown;
+import java.util.List;
+
 public class BridgeGame {
+    private boolean gameResult;
 
-    /**
-     * 사용자가 칸을 이동할 때 사용하는 메서드
-     * <p>
-     * 이동을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-     */
-    public void move() {
+    public void move(int size, List<String> answerBridge, FinalResult finalResult) {
+        gameResult = true;
 
+        for (int index = 0; index < size; index++) {
+            UpDown move = UserInputHandler.getValidMove();
+
+            if (!answerBridge.get(index).equals(move.getMove())) {
+                finalResult.addFailResult(move.getMove());
+                printMap(finalResult.getFinalResult());
+                gameResult = false;
+                break;
+            }
+            finalResult.addSuccessResult(move.getMove());
+            printMap(finalResult.getFinalResult());
+        }
     }
 
-    /**
-     * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-     * <p>
-     * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-     */
-    public void retry() {
+    public boolean retry() {
+        Restart inputRestart = UserInputHandler.getValidRestart();
+        return inputRestart.isRestart();
+    }
+
+    public boolean getGameResult() {
+        return gameResult;
     }
 }
